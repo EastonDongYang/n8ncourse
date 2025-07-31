@@ -14,15 +14,15 @@ import {
 import Link from 'next/link'
 
 const templateInfo = {
-  title: 'Auto-post Tweets to Telegram',
-  description: 'Monitor Twitter/X activity, automatically forward to Telegram channels with keyword filtering and formatting',
+  title: 'Monitor Twitter and Save to Airtable',
+  description: 'Search Twitter/X for specific keywords, automatically collect and organize tweets in Airtable database with deduplication',
   category: 'Social Media',
   difficulty: 'Beginner',
   duration: '15 minutes',
   downloads: '2.3k',
   likes: 156,
   rating: 4.8,
-  tags: ['Twitter', 'Telegram', 'Auto-posting'],
+  tags: ['Twitter', 'Airtable', 'Data Collection'],
   author: 'n8n Community',
   lastUpdated: '3 days ago'
 }
@@ -30,56 +30,56 @@ const templateInfo = {
 const workflowSteps = [
   {
     id: 1,
-    title: 'Twitter Trigger Setup',
-    description: 'Configure Twitter monitoring for specific accounts or keywords',
+    title: 'Twitter Search Configuration',
+    description: 'Set up Twitter API to search for specific keywords or topics',
     duration: '5 minutes',
     content: [
       'Create Twitter API credentials and connect to n8n',
-      'Set up Twitter trigger node to monitor tweets',
-      'Configure filtering options (keywords, hashtags, users)',
-      'Test the trigger to ensure tweets are captured correctly'
+      'Configure Twitter search node with target keywords',
+      'Set search parameters (limit, result type, language)',
+      'Test the search to ensure relevant tweets are captured'
     ]
   },
   {
     id: 2,
-    title: 'Content Processing',
-    description: 'Filter and format tweet content for Telegram',
+    title: 'Data Extraction & Processing', 
+    description: 'Extract and format tweet data for Airtable storage',
     duration: '5 minutes',
     content: [
-      'Add IF node to filter tweets based on criteria',
-      'Use Set node to format tweet content for Telegram',
-      'Extract relevant information (text, images, links)',
-      'Add timestamp and author information'
+      'Use Set nodes to extract tweet content, author, and metadata',
+      'Format tweet URLs and timestamps for database storage',
+      'Calculate engagement metrics (likes, retweets)',
+      'Prepare data structure for Airtable integration'
     ]
   },
   {
     id: 3,
-    title: 'Telegram Integration',
-    description: 'Send formatted content to Telegram channel',
+    title: 'Airtable Integration & Deduplication',
+    description: 'Save tweets to database while avoiding duplicates',
     duration: '5 minutes',
     content: [
-      'Set up Telegram Bot API credentials',
-      'Configure Telegram node to send messages',
-      'Format message with proper Telegram markdown',
-      'Test the complete workflow end-to-end'
+      'Set up Airtable API credentials and database connection',
+      'Configure merge node to identify duplicate tweets',
+      'Set up automatic data appending for new tweets only',
+      'Test the complete workflow with sample data'
     ]
   }
 ]
 
 const requirements = [
   'Twitter API Developer Account',
-  'Telegram Bot Token',
+  'Airtable account with API access',
   'n8n instance (cloud or self-hosted)',
   'Basic understanding of API credentials'
 ]
 
 const features = [
-  'Real-time tweet monitoring',
-  'Keyword and hashtag filtering',
-  'Automatic content formatting',
-  'Image and media forwarding',
-  'Rate limiting protection',
-  'Error handling and retries'
+  'Keyword-based tweet searching',
+  'Automatic data extraction and formatting',
+  'Duplicate tweet detection and prevention',
+  'Engagement metrics tracking (likes, retweets)',
+  'Structured data storage in Airtable',
+  'Scalable batch processing with rate limiting'
 ]
 
 export default function AutoPostTweetsTemplate() {
@@ -100,7 +100,7 @@ export default function AutoPostTweetsTemplate() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
             <div className="flex items-start gap-6 mb-6">
-              <div className="text-4xl">🐦</div>
+              <div className="text-4xl">📊</div>
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800">
@@ -142,9 +142,9 @@ export default function AutoPostTweetsTemplate() {
                 </div>
               </div>
               <div className="text-center">
-                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors mb-3">
+                <a href="/workflows/auto-post-tweets-airtable.json" download className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors mb-3 inline-block">
                   Download Template
-                </button>
+                </a>
                 <div className="text-sm text-gray-500">Updated {templateInfo.lastUpdated}</div>
               </div>
             </div>
@@ -233,13 +233,13 @@ export default function AutoPostTweetsTemplate() {
         <div className="mt-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white text-center">
           <h2 className="text-2xl font-bold mb-4">🚀 Ready to Build This Workflow?</h2>
           <p className="text-lg mb-6 opacity-90">
-            Download the template and start automating your Twitter to Telegram workflow in minutes!
+            Download the template and start collecting Twitter data in your Airtable database in minutes!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
+            <a href="/workflows/auto-post-tweets-airtable.json" download className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
               <ArrowDownTrayIcon className="h-5 w-5 mr-2" />
               Download JSON Template
-            </button>
+            </a>
             <button className="bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors border border-blue-500 inline-flex items-center">
               <PlayCircleIcon className="h-5 w-5 mr-2" />
               Watch Video Tutorial
