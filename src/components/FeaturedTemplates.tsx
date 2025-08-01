@@ -12,7 +12,7 @@ const templates = [
     emoji: '📊',
     tags: ['Twitter', 'Airtable', 'Data Collection'],
     estimatedTime: '15 minutes',
-    slug: 'auto-post-tweets-telegram'
+    slug: 'twitter-to-airtable'
   },
   {
     title: 'Sync Form Responses to Google Sheets',

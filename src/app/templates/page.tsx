@@ -21,7 +21,7 @@ const templates = [
     emoji: '📊',
     tags: ['Twitter', 'Airtable', 'Data Collection'],
     estimatedTime: '15 minutes',
-    slug: 'auto-post-tweets-telegram',
+    slug: 'twitter-to-airtable',
     rating: 4.8
   },
   {

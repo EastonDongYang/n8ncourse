@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 export default function WorkflowsPage() {
   const workflows = [
     {
-      id: 'auto-post-tweets-telegram',
+      id: 'twitter-to-airtable',
       title: 'Monitor Twitter and Save to Airtable',
       description: 'Search Twitter/X for specific keywords, automatically collect and organize tweets in Airtable database with deduplication.',
       category: 'Social Media',

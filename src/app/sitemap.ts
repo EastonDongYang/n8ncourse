@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 模板页面
   const templatePages = [
     '/template/aggregate-rss-notion',
-    '/template/auto-post-tweets-telegram',
+    '/template/twitter-to-airtable',
     '/template/daily-report-generation',
     '/template/ecommerce-order-processing',
     '/template/generate-summaries-openai-email',
