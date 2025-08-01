@@ -130,7 +130,7 @@ export default function AggregateRSSNotionTemplate() {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-4xl mx-auto px-6 py-4">
-          <Link href="/" className="inline-flex items-center text-primary-600 hover:text-primary-700 transition-colors">
+          <Link href="/#templates" className="inline-flex items-center text-primary-600 hover:text-primary-700 transition-colors">
             <ArrowLeftIcon className="h-5 w-5 mr-2" />
             Back to Templates
           </Link>
