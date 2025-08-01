@@ -111,9 +111,11 @@ export default function FeaturedTemplates() {
                 </button>
               </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
-                {template.title}
-              </h3>
+              <Link href={`/template/${template.slug}`}>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors cursor-pointer">
+                  {template.title}
+                </h3>
+              </Link>
               <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                 {template.description}
               </p>
