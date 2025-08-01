@@ -6,18 +6,19 @@ export default function WorkflowsPage() {
   const workflows = [
     {
       id: 'auto-post-tweets-telegram',
-      title: 'Auto-post Tweets to Telegram',
-      description: 'Monitor Twitter/X activity, automatically forward to Telegram channels with keyword filtering and custom formatting.',
+      title: 'Monitor Twitter and Save to Airtable',
+      description: 'Search Twitter/X for specific keywords, automatically collect and organize tweets in Airtable database with deduplication.',
       category: 'Social Media',
       difficulty: 'Beginner',
       duration: '15 minutes',
       downloads: '2.3k',
       likes: '156',
-      bgColor: 'bg-pink-100',
-      categoryColor: 'bg-pink-100 text-pink-800',
+      bgColor: 'bg-blue-100',
+      categoryColor: 'bg-blue-100 text-blue-800',
       icon: (
-        <svg className="w-6 h-6 text-pink-600" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M7 4V2a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v2H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h1v11a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8h1a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-1V2a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v2H7zM5 2h2v4H5V2zm14 0h2v4h-2V2zM3 5h18v2H3V5zm16 3v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8h14z"/>
+          <path d="M8 10h8v2H8v-2zm0 4h8v2H8v-2z"/>
         </svg>
       )
     },

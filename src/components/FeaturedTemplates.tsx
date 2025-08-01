@@ -3,14 +3,14 @@ import Link from 'next/link'
 
 const templates = [
   {
-    title: 'Auto-post Tweets to Telegram',
-    description: 'Monitor Twitter/X activity, automatically forward to Telegram channels with keyword filtering and formatting',
+    title: 'Monitor Twitter and Save to Airtable',
+    description: 'Search Twitter/X for specific keywords, automatically collect and organize tweets in Airtable database with deduplication',
     category: 'Social Media',
     difficulty: 'Beginner',
     downloads: '2.3k',
     likes: 156,
-    emoji: '🐦',
-    tags: ['Twitter', 'Telegram', 'Auto-posting'],
+    emoji: '📊',
+    tags: ['Twitter', 'Airtable', 'Data Collection'],
     estimatedTime: '15 minutes',
     slug: 'auto-post-tweets-telegram'
   },
