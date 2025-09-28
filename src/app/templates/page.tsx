@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useMemo } from 'react'
 import { 
   ArrowDownTrayIcon, 
   HeartIcon, 
@@ -6,7 +9,8 @@ import {
   TagIcon,
   FunnelIcon,
   MagnifyingGlassIcon,
-  ArrowLeftIcon
+  ArrowLeftIcon,
+  XMarkIcon
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
@@ -109,6 +113,28 @@ const difficulties = [
 ]
 
 export default function TemplatesPage() {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('All Categories')
+  const [selectedDifficulty, setSelectedDifficulty] = useState('All Levels')
+
+  // 筛选模板
+  const filteredTemplates = useMemo(() => {
+    return templates.filter(template => {
+      const matchesSearch = template.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           template.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           template.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+      
+      const matchesCategory = selectedCategory === 'All Categories' || template.category === selectedCategory
+      const matchesDifficulty = selectedDifficulty === 'All Levels' || template.difficulty === selectedDifficulty
+
+      return matchesSearch && matchesCategory && matchesDifficulty
+    })
+  }, [searchTerm, selectedCategory, selectedDifficulty])
+
+  const clearSearch = () => {
+    setSearchTerm('')
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -137,7 +163,7 @@ export default function TemplatesPage() {
             <div className="flex justify-center items-center gap-8 text-sm text-gray-600">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>{templates.length} Templates Available</span>
+                <span>{filteredTemplates.length} Templates Available</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
@@ -163,14 +189,28 @@ export default function TemplatesPage() {
                 <input
                   type="text"
                   placeholder="Search templates..."
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 />
+                {searchTerm && (
+                  <button
+                    onClick={clearSearch}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 hover:text-gray-600"
+                  >
+                    <XMarkIcon className="h-5 w-5" />
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Category Filter */}
             <div className="lg:w-48">
-              <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+              <select 
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
                 {categories.map((category, index) => (
                   <option key={index} value={category}>{category}</option>
                 ))}
@@ -179,24 +219,37 @@ export default function TemplatesPage() {
 
             {/* Difficulty Filter */}
             <div className="lg:w-40">
-              <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+              <select 
+                value={selectedDifficulty}
+                onChange={(e) => setSelectedDifficulty(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
                 {difficulties.map((difficulty, index) => (
                   <option key={index} value={difficulty}>{difficulty}</option>
                 ))}
               </select>
             </div>
 
-            {/* Filter Button */}
-            <button className="lg:w-auto px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors inline-flex items-center justify-center">
-              <FunnelIcon className="h-5 w-5 mr-2" />
-              Filter
+            {/* Clear Filters Button */}
+            <button 
+              onClick={() => {
+                setSearchTerm('')
+                setSelectedCategory('All Categories')
+                setSelectedDifficulty('All Levels')
+              }}
+              className="lg:w-auto px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors inline-flex items-center justify-center"
+              disabled={searchTerm === '' && selectedCategory === 'All Categories' && selectedDifficulty === 'All Levels'}
+            >
+              <XMarkIcon className="h-5 w-5 mr-2" />
+              Clear
             </button>
           </div>
         </div>
 
         {/* Templates Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {templates.map((template, index) => (
+        {filteredTemplates.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredTemplates.map((template, index) => (
             <div key={index} className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -271,15 +324,39 @@ export default function TemplatesPage() {
                 </Link>
               </div>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          /* No Results */
+          <div className="text-center py-16">
+            <div className="max-w-md mx-auto">
+              <div className="text-6xl mb-6">🔍</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No templates found</h3>
+              <p className="text-gray-600 mb-6">
+                Try adjusting your search or filter criteria to find what you're looking for.
+              </p>
+              <button
+                onClick={() => {
+                  setSearchTerm('')
+                  setSelectedCategory('All Categories')
+                  setSelectedDifficulty('All Levels')
+                }}
+                className="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors"
+              >
+                Clear All Filters
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Load More */}
-        <div className="text-center mt-12">
-          <button className="bg-white text-primary-600 border-2 border-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors duration-200">
-            Load More Templates
-          </button>
-        </div>
+        {filteredTemplates.length > 0 && (
+          <div className="text-center mt-12">
+            <button className="bg-white text-primary-600 border-2 border-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors duration-200">
+              Load More Templates
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Call to Action */}
